@@ -96,6 +96,7 @@ public enum MimeTypeEnum {
         this.remark = remark;
     }
 
+
     public String extension() {
         return this.extension;
     }
