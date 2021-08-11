@@ -1,4 +1,4 @@
-package com.github.whiliang.minio;
+package io.github.whiliang.minio;
 
 import io.minio.*;
 import io.minio.errors.*;
@@ -33,7 +33,7 @@ public class MinioService {
     private MinioClient minioClient;
 
     @Autowired
-    private com.github.whiliang.minio.MinioProperties minioProperties;
+    private MinioProperties minioProperties;
 
     public static String getBucketPolicyJson(String bucketName) {
         StringBuilder builder = new StringBuilder();
@@ -120,7 +120,7 @@ public class MinioService {
                         return itemResult.get();
                     } catch (
                             NoSuchAlgorithmException | InsufficientDataException | IOException | InvalidKeyException | XmlParserException | InvalidResponseException | ErrorResponseException | InternalException | ServerException e) {
-                        throw new com.github.whiliang.minio.MinioException("Error while parsing list of objects", e);
+                        throw new io.github.whiliang.minio.MinioException("Error while parsing list of objects", e);
                     }
                 })
                 .collect(Collectors.toList());
@@ -132,13 +132,13 @@ public class MinioService {
      * @param bucketName    bucketName
      * @param minioFileName minioFileName
      * @return Metadata of the  object
-     * @throws com.github.whiliang.minio.MinioException if an error occur while fetching object metadatas
+     * @throws io.github.whiliang.minio.MinioException if an error occur while fetching object metadatas
      */
-    public StatObjectResponse getMetadata(String bucketName, String minioFileName) throws com.github.whiliang.minio.MinioException {
+    public StatObjectResponse getMetadata(String bucketName, String minioFileName) throws io.github.whiliang.minio.MinioException {
         try {
             return minioClient.statObject(StatObjectArgs.builder().bucket(bucketName).object(minioFileName).build());
         } catch (XmlParserException | NoSuchAlgorithmException | InsufficientDataException | IOException | InvalidKeyException | ErrorResponseException | InternalException | InvalidResponseException | ServerException e) {
-            throw new com.github.whiliang.minio.MinioException("Error while fetching files in Minio", e);
+            throw new io.github.whiliang.minio.MinioException("Error while fetching files in Minio", e);
         }
     }
 
@@ -149,10 +149,10 @@ public class MinioService {
      * @param minioFileName minio文件名称
      * @param inputStream   文件流
      * @param mimeTypeEnum  文件的MIME, eg "video/mp4"
-     * @throws com.github.whiliang.minio.MinioException if an error occur while uploading object
+     * @throws io.github.whiliang.minio.MinioException if an error occur while uploading object
      */
     public MinioUploadResponse upload(String bucketName, String minioFileName, InputStream inputStream, MimeTypeEnum mimeTypeEnum) throws
-            com.github.whiliang.minio.MinioException {
+            io.github.whiliang.minio.MinioException {
         try {
             minioClient.putObject(
                     PutObjectArgs.builder().bucket(bucketName).object(minioFileName).stream(
@@ -164,7 +164,7 @@ public class MinioService {
                     .intranetUrl(minioProperties.getIntranetUrl(), bucketName, minioFileName)
                     .build();
         } catch (ServerException | ErrorResponseException | InsufficientDataException | InternalException | InvalidKeyException | InvalidResponseException | IOException | NoSuchAlgorithmException | XmlParserException e) {
-            throw new com.github.whiliang.minio.MinioException("Error while uploading files in Minio", e);
+            throw new io.github.whiliang.minio.MinioException("Error while uploading files in Minio", e);
         }
     }
 
@@ -173,9 +173,9 @@ public class MinioService {
      *
      * @param bucketName    bucketName
      * @param minioFileName minioFileName
-     * @throws com.github.whiliang.minio.MinioException if an error occur while removing object
+     * @throws io.github.whiliang.minio.MinioException if an error occur while removing object
      */
-    public void remove(String bucketName, String minioFileName) throws com.github.whiliang.minio.MinioException {
+    public void remove(String bucketName, String minioFileName) throws io.github.whiliang.minio.MinioException {
         try {
             minioClient.removeObject(RemoveObjectArgs.builder().bucket(bucketName).object(minioFileName).build());
         } catch (XmlParserException | NoSuchAlgorithmException | InsufficientDataException | IOException | InvalidKeyException | ErrorResponseException | InternalException | InvalidResponseException | ServerException e) {

@@ -1,4 +1,4 @@
-package com.github.whiliang.minio;
+package io.github.whiliang.minio;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

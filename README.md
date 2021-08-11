@@ -9,7 +9,7 @@ Spring Boot Starter Minio适配minio 8.0.3及以上版本,用于minio文件的�
 Maven
 ```xml
 <dependency>
-    <groupId>com.github.whiliang</groupId>
+    <groupId>io.github.whiliang</groupId>
     <artifactId>spring-boot-starter-minio</artifactId>
     <version>8.0.3</version>
 </dependency>

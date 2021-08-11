@@ -1,4 +1,4 @@
-package com.github.whiliang.minio;
+package io.github.whiliang.minio;
 
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnClass(MinioClient.class)
 @EnableConfigurationProperties(MinioProperties.class)
-@ComponentScan("com.github.whiliang.minio")
+@ComponentScan("io.github.whiliang.minio")
 @ConditionalOnProperty(
         prefix = "spring.minio",
         name = "enable",
