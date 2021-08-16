@@ -11,7 +11,7 @@ Maven
 <dependency>
     <groupId>io.github.whiliang</groupId>
     <artifactId>spring-boot-starter-minio</artifactId>
-    <version>8.0.3</version>
+    <version>8.0.3.RELEASE</version>
 </dependency>
 ```
 
